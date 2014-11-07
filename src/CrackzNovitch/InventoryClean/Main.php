@@ -24,7 +24,7 @@ use pocketmine\plugin\PluginBase;
 use pocketmine\utils\TextFormat;
 use pocketmine\scheduler\PluginTask;
 
-class InventoryCln extends BaseCommand{
+class InventoryClean extends BaseCommand{
     public function __construct(Loader $plugin){
         parent::__construct($plugin, "InventoryClean", "Clear your/other's inventory", "/inventoryclean [player]", ["ci", "clean", "clearinvent"]);
     }
@@ -36,7 +36,7 @@ class InventoryCln extends BaseCommand{
         switch(count($args)){
             case 0:
                 if(!$sender instanceof Player){
-                    $sender->sendMessage(TextFormat::RED . "Usage: /inventoryclean <player>");
+                    $sender->sendMessage(TextFormat::RED . "Usage: /ic <player>"); // Som Us alias
                     return false;
                 }
                 $gm = $sender->getServer()->getGamemodeString($sender->getGamemode());
