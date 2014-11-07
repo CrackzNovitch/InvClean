@@ -24,4 +24,26 @@ use pocketmine\plugin\PluginBase;
 use pocketmine\utils\TextFormat;
 use pocketmine\scheduler\PluginTask;
 
+class InventoryCln extends BaseCommand{
+    public function __construct(Loader $plugin){
+        parent::__construct($plugin, "InventoryClean", "Clear your/other's inventory", "/inventoryclean [player]", ["ci", "clean", "clearinvent"]);
+    }
+
+    public function execute(CommandSender $sender, $alias, array $args){
+        if(!$this->testPermission($sender)){
+            return false;
+        }
+        switch(count($args)){
+            case 0:
+                if(!$sender instanceof Player){
+                    $sender->sendMessage(TextFormat::RED . "Usage: /inventoryclean <player>");
+                    return false;
+                }
+                $gm = $sender->getServer()->getGamemodeString($sender->getGamemode());
+                if($gm === 1 || $gm === 3){
+                    $sender->sendMessage(TextFormat::RED . "[Error] You're in " . ($gm === 1 ? "creative" : "adventure") . " mode");
+                    return false;
+                }
+
+
 // TODO code Here
